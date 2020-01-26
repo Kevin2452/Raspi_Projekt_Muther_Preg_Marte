@@ -1,0 +1,61 @@
+
+
+#-----------Ports Definieren-------------------------
+import random			
+import RPi.GPIO as GPIO			
+import time			
+GPIO.setmode(GPIO.BCM)		
+GPIO.setup(17, GPIO.OUT)			
+GPIO.setup(18, GPIO.OUT)			
+GPIO.setup(27, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
+GPIO.setup(5, GPIO.IN)
+GPIO.setup(6, GPIO.IN)
+GPIO.setup(13, GPIO.IN)
+GPIO.setup(26, GPIO.IN)
+#----------------------------------------------------
+while True:
+	while GPIO.input(5)==0:
+		GPIO.output(17, GPIO.HIGH)
+	else:
+		GPIO.output(17, GPIO.LOW)
+		time.sleep(2.5)
+		x= random.randint(1,4)				#Random Zahl zwischen 1 und 4
+		if x==1:					#Zuweisen der Taster zu den LED's
+			t=5
+			le=17
+		if x==2:
+			t=6
+			le=27	
+		if x==3:
+			t=13
+			le=22
+		if x==4:
+			t=26
+			le=18
+
+		GPIO.output(le, GPIO.HIGH)		
+		start=time.time()			#Start der Zeitnehmung
+		time.sleep(0.5)				#Wie lang leuchtet die LED	
+		GPIO.output(le, GPIO.LOW)
+		while GPIO.input(t)==0:			#Warten bis richtiger Taster gedrückt wurde
+			time.sleep(0.001)
+		else:
+			ende=time.time()
+			diff=ende-start
+			print('{:5.3f}s'.format(ende-start-0.5))		#Ausgabe der Zeit
+			time.sleep(5)
+			GPIO.output(22, GPIO.HIGH)				#Alle LED's ein und aus, damit das Ende des Spieles symbolisiert wird
+			GPIO.output(27, GPIO.HIGH)
+			GPIO.output(18, GPIO.HIGH)
+			GPIO.output(17, GPIO.HIGH)
+			time.sleep(2)
+			GPIO.output(22, GPIO.LOW)
+			GPIO.output(27, GPIO.LOW)
+			GPIO.output(18, GPIO.LOW)
+			GPIO.output(17, GPIO.LOW)
+			time.sleep(2.5)
+		
+		
+		
+		
