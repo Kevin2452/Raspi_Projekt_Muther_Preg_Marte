@@ -17,8 +17,10 @@ Um das Projekt mit dem Raspberry Pi zu verwenden müssen folgende Packete instal
  sudo apt-get install python-dev
  sudo apt-get install python-rpi.gpio
 
+
 Verwendete Quellen:
 http://raspberrypiguide.de/howtos/raspberry-pi-gpio-how-to/
+
 
 
 
